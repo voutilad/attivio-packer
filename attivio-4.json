@@ -15,9 +15,9 @@
     "headless": false,
     "http_directory": "http",
     "iso_urls": [
-      "iso/{{.centos_iso}}",
-      "http://localhost:8080/{{.centos_iso}}",
-      "http://mirrors.rit.edu/centos/6.6/isos/x86_64/{{.centos_iso}}"],
+      "iso/{{user `centos_iso`}}",
+      "http://localhost:8080/{{user `centos_iso`}}",
+      "http://mirrors.rit.edu/centos/6.6/isos/x86_64/{{user `centos_iso`}}"],
     "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
     "iso_checksum_type": "md5",
     "ssh_username": "vagrant",
@@ -58,7 +58,7 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/attivio.sh",
       "environment_vars": [
-        "FILEHOST:{{.local_http}}"
+        "FILEHOST={{user `local_http`}}"
       ]
     },
     {
@@ -69,7 +69,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/attivio-{{.attivio_version}}-centos66.box",
+      "output": "builds/attivio-{{user `attivio_version`}}-centos66.box",
       "type": "vagrant"
     }
   ]
