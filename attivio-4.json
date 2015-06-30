@@ -38,12 +38,11 @@
       ]
     ]
   }],
-  "provisioners": [{
-    "type": "shell",
-    "inline": [
-      "sleep 30",
-      "sudo yum update",
-      "sudo yum install -y libstdc++"
-    ]
-    }]
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ],
 }
