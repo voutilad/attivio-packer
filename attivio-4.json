@@ -1,0 +1,49 @@
+{
+  "variables": {
+    "attivio_version": "4.3.2"
+  },
+  "builders": [{
+    "type": "virtualbox-iso",
+    "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+    "boot_wait": "10s",
+    "disk_size": 20480,
+    "guest_os_type": "RedHat_64",
+    "headless": false,
+    "iso_urls": [
+      "iso/CentOS-6.6-x86_64-minimal.iso",
+      "http://mirrors.rit.edu/centos/6.6/isos/x86_64/CentOS-6.6-x86_64-minimal.iso"],
+    "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
+    "iso_checksum_type": "md5",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_wait_timeout": "10000s",
+    "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
+    "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+    "virtualbox_version_file": ".vbox_version",
+    "vm_name": "packer-centos-6.6-x86_64",
+    "vboxmanage": [
+      [
+        "modifyvm",
+        "{{.Name}}",
+        "--memory",
+        "8192"
+      ],
+      [
+        "modifyvm",
+        "{{.Name}}",
+        "--cpus",
+        "2"
+      ]
+    ]
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo yum update",
+      "sudo yum install -y libstdc++"
+    ]
+    }]
+}
