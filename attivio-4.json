@@ -1,6 +1,8 @@
 {
   "variables": {
-    "attivio_version": "4.3.2"
+    "attivio_version": "4.3.2",
+    "centos_iso": "CentOS-6.6-x86_64-minimal.iso",
+    "local_http": "http://10.1.7.148:8080"
   },
   "builders": [{
     "type": "virtualbox-iso",
@@ -13,8 +15,9 @@
     "headless": false,
     "http_directory": "http",
     "iso_urls": [
-      "iso/CentOS-6.6-x86_64-minimal.iso",
-      "http://mirrors.rit.edu/centos/6.6/isos/x86_64/CentOS-6.6-x86_64-minimal.iso"],
+      "iso/{{.centos_iso}}",
+      "http://localhost:8080/{{.centos_iso}}",
+      "http://mirrors.rit.edu/centos/6.6/isos/x86_64/{{.centos_iso}}"],
     "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
     "iso_checksum_type": "md5",
     "ssh_username": "vagrant",
@@ -53,10 +56,10 @@
     {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/attivio.sh",
       "environment_vars": [
-        "ATTIVIO_VARFILE=http://{{ .HTTPIP }}:{{ .HTTPPort }}/attivio.varfile"
-      ],
-      "script": "scripts/attivio.sh"
+        "FILEHOST:{{.local_http}}"
+      ]
     },
     {
       "type": "shell",
