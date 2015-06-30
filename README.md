@@ -1,3 +1,12 @@
+# Packer to Vagrant for CentOS 6.6
+
+Forked from an *awesome* example: [geerlingguy/packer-centos-6](https://github.com/geerlingguy/packer-centos-6)
+
+I've removed the Ansible stuff and started to tailor to [Attivio](http://www.attivio.com) needs.
+
+Original README.md below:
+---
+
 # Packer Example - CentOS 6 minimal Vagrant Box using Ansible provisioner
 
 **Current CentOS Version Used**: 6.6
