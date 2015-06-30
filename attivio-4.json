@@ -11,6 +11,7 @@
     "disk_size": 20480,
     "guest_os_type": "RedHat_64",
     "headless": false,
+    "http_directory": "http",
     "iso_urls": [
       "iso/CentOS-6.6-x86_64-minimal.iso",
       "http://mirrors.rit.edu/centos/6.6/isos/x86_64/CentOS-6.6-x86_64-minimal.iso"],
