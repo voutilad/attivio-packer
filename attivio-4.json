@@ -2,14 +2,14 @@
   "variables": {
     "attivio_version": "4.3.2",
     "centos_iso": "CentOS-6.6-x86_64-minimal.iso",
-    "local_http": "http://10.1.7.148:8080"
+    "local_http": "172.20.2.167:8080"
   },
   "builders": [{
     "type": "virtualbox-iso",
     "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ],
-    "boot_wait": "10s",
+    "boot_wait": "5s",
     "disk_size": 20480,
     "guest_os_type": "RedHat_64",
     "headless": false,
@@ -22,9 +22,9 @@
     "iso_checksum_type": "md5",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
-    "ssh_wait_timeout": "10000s",
+    "ssh_wait_timeout": "25m",
     "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
-    "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+    "guest_additions_path": "VBoxGuestAdditions.iso",
     "virtualbox_version_file": ".vbox_version",
     "vm_name": "packer-centos-6.6-x86_64",
     "vboxmanage": [
