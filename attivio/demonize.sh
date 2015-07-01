@@ -1,7 +1,9 @@
-cp ./aie-agent-daemon /etc/init.d/
+#!/bin/bash
+echo "Copying init script..."
+sudo cp ./aie-agent-daemon /etc/init.d/
 
-/sbin/chkconfig aie-agent-daemon on 
-verification=`/sbin/chkconfig --list aie-agent-daemon`
+sudo /sbin/chkconfig aie-agent-daemon on
+verification=`sudo /sbin/chkconfig --list aie-agent-daemon`
 columns=( $verification )
 
 if [[ "${columns[0]}" == "aie-agent-daemon" &&

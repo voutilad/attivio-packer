@@ -3,18 +3,18 @@
 
 umask 077
 
-CRCsum="4173214552"
-MD5="c1ccc4df04131cdb9d9f6e66b119ac91"
+CRCsum="2519186590"
+MD5="244249c366b780a3f434b2625b77e9e3"
 TMPROOT=${TMPDIR:=/tmp}
 USER_PWD="$PWD"; export USER_PWD
 
-label="Attivio 4 Demonizer"
-script="demonize.sh"
+label="Attivio 4 Daemonizer"
+script="./demonize.sh"
 scriptargs=""
 licensetxt=""
 helpheader=''
 targetdir="attivio"
-filesizes="1535"
+filesizes="1776"
 keep="n"
 quiet="n"
 
@@ -236,15 +236,15 @@ do
     --info)
 	echo Identification: "$label"
 	echo Target directory: "$targetdir"
-	echo Uncompressed size: 8 KB
+	echo Uncompressed size: 12 KB
 	echo Compression: gzip
-	echo Date of packaging: Wed Jul  1 11:35:17 EDT 2015
+	echo Date of packaging: Wed Jul  1 12:10:52 EDT 2015
 	echo Built with Makeself version 2.2.0 on darwin14
-	echo Build command was: "./makeself.sh \\
+	echo Build command was: "/Users/dvoutila/src/makeself/makeself.sh \\
     \"/Users/dvoutila/src/packer-centos-6/attivio\" \\
-    \"demonize.sh\" \\
-    \"Attivio 4 Demonizer\" \\
-    \"demonize.sh\""
+    \"install_daemon.sh\" \\
+    \"Attivio 4 Daemonizer\" \\
+    \"./demonize.sh\""
 	if test x"$script" != x; then
 	    echo Script run after extraction:
 	    echo "    " $script $scriptargs
@@ -269,7 +269,7 @@ do
 	echo filesizes=\"$filesizes\"
 	echo CRCsum=\"$CRCsum\"
 	echo MD5sum=\"$MD5\"
-	echo OLDUSIZE=8
+	echo OLDUSIZE=12
 	echo OLDSKIP=505
 	exit 0
 	;;
@@ -437,7 +437,7 @@ fi
 offset=`head -n 504 "$0" | wc -c | tr -d " "`
 
 if test x"$verbose" = xy; then
-	MS_Printf "About to extract 8 KB in $tmpdir ... Proceed ? [Y/n] "
+	MS_Printf "About to extract 12 KB in $tmpdir ... Proceed ? [Y/n] "
 	read yn
 	if test x"$yn" = xn; then
 		eval $finish; exit 1
@@ -454,9 +454,9 @@ fi
 
 leftspace=`MS_diskspace $tmpdir`
 if test -n "$leftspace"; then
-    if test "$leftspace" -lt 8; then
+    if test "$leftspace" -lt 12; then
         echo
-        echo "Not enough space left in "`dirname $tmpdir`" ($leftspace KB) to decompress $0 (8 KB)" >&2
+        echo "Not enough space left in "`dirname $tmpdir`" ($leftspace KB) to decompress $0 (12 KB)" >&2
         if test x"$keep" = xn; then
             echo "Consider setting TMPDIR to a directory with more free space."
         fi
@@ -502,11 +502,7 @@ if test x"$keep" = xn; then
     /bin/rm -rf $tmpdir
 fi
 eval $finish; exit $res
-‹ µ”UíXmoÚHÎgÿŠ‰A!œ
-Øæ%*­PÃõĞ]›ŠŞIUE{{1¶Ï»&MşûÍîÚ` D9õR©’çCŒ×³3³ÏÌ<»›zãàÙÅ0Œ“vä³Ó‘OÃj©g*`ZíVÛ0š'í&¦e™Ö´~€$ŒÛ1†â.Â„SßŞ§‡j÷ø"Å:VÏŸDê›’š=%¯¹6™‡Á³ä¿ÓjíÍ»æ¿urÒ±:&æ¿mµ0ÿF‘ÿg—Òaãšk›Í´’Vrf7NxtÚ«ÙjÃIš†V—0'¦§aĞ…>çtACè;ø$08ñ}Š%äS8î‹Š‚/H\EQ:„±À“.l—zF)}Ÿ “M¾ûp>÷ßó/>#ŒÀÂ©}í×Äcq4˜âgÊ@­¸‹ÁõÇãáÇáùä·ówƒ^#ŒxÃVˆæ™´êÍº¥õ‡ƒIÿíàıx"¼öÌÎË—/sƒgıqr6í™Şpmn+L´ÑåûIÿbry1õö4¶qì{±òær4¡HÃåãÛYhÏi?P>Aí+èåüBuø¬!LÄ™… ÿŠú@â8Œ±rŠ€X!Fø¡Ú_(Sóè†át7½¡úßŒg(?ÑA¦ş'¹¬<j=§·ß¬,ŒÁ_ƒ7“7ïÎzåû<œKÙ«AåÑ`ü±ÿGÏĞ4ÁUü¸
-÷šSÂ'øÎ¯ á’E#H|_rù5ÔÈ?``¤ BEQÑgD@ ÒºÑöcb»wYñbç0–1*1‘>+à„ó¹¸@ÆQ½®K“ih¦|‰	Oâ Ê÷jt©\kÓ…0¤º‹¤Ş™äˆÂ˜ãÌÍä/õt9z9_¼:ôv²^fÎ’(µ•a¼„Z´kjîÆ`VKxµ¬WG&À®ÂgD:`‰XãÚ=Úq@ÿ?Üîø=Ò%ˆÎå×Ú.ÊK1ãa$#9šÌ#w¿S4(’.im–à-² £")9uš÷mN\1k§\'æöÁÅ#OâÇ‰É“èE/rF|ïˆba‰Ö5ˆĞ02NÄ°(=x“Ö›@6P[¨çúµ²½Q€XfåQUÁ>¦„{œ›S´oo r0PŒ¦lÁ²REØÃXe± ÜP¤¿¤ĞÌ°S]Š î$	KKœÆğaxv¡­ONûB}KùLšïb&ñ¹”ıôäb‡u¹Ã°«ŒHgY™î©Óœºô)ÊË¢ê(E%_J#5”unVB"â/~RS×„t\%Ÿd&N˜	Á‹DV"aL ü7¿rù©`$„·a|ƒe'"/AèmÔ›…·uTùÌæDtvwaQÕ›0Eaº S3D<úåQ]EªN<¨loe·.o¨ùW¸´ÒŸDÄø.Ìlì-¹`sğ‰²°U¸3‹\ÆŠÉ¶Ğ¡6Å(­MÛ"ë~FÖ)I+ö…ÕÎËú‰"]q7'šŠ]¾M)êeSÇH]³UÊñÇé©ª‚tT”C6(ª@¯‹"û˜V˜üšşÎ>åÚrkòæ»›\®!rFÅâ”é_ª«F,ë—“€gÀ½T}Á?(Oéô‡\0ªQÒı›0ÛÑ4ù‚t|ğ“KaEF¤_IÍïşÿØıÏ´+»ÿ·Ì¦¸ÿµšÅıïÇˆÁî¿  A¸Ó åu·¡i&ˆqu5Ü¹¾‰ó›†ç8êQÇWÄŞÕö”ZÍ§HŒÛ3¯4'ô“yÀzÇPÎ[€ª:{Â¼Ou>Ÿ—¸âv¸mF‡£#Åkyu3S7º¡ç}[ÇÊtÌı:ÍLÇêîsÕÊTš{UÚ™Jk¯J'SiïU9ÉT:*ŞÏÙM$¥ı3•OØˆ<$P<ê“)¦ƒÄ¸SÊƒˆØ'ÙÌå¹^’›qª¥›Š2=ÎG]p÷zHq—[ï5y’óT\†
-)¤B
-)¤B
-)¤B
-)¤B
-)¤g’uO  (  
+‹ ”UíXmoÛ6ÎgşŠ‹bÄñP[²ü†ºH/ñº`KS8i7 +F¢,-²¤‰T²,ñ~û¤dËqtèÚa€îCSÇ»ã½<ÇSËÜùâdYÖ ×õì÷ÕÓ²»ú™´í^·gYİn¯VÛ¶ÛÖôv¾e\ĞMqoâL!İÆ‡l÷ô!å9–Ïÿ	µL°&±H4]ÊæqôEâßïv·Æ¿×Ëãßúv¿ñïÙ]{¬*ş_œövÍ« 2¯(÷ÉÙsük'¼`6»ÓíÁ ‹ìË¸“‰âh#!‚› †‘ƒO'‘`a`
+9ÆÑ,ˆŒdFÁ9KoXÚ@I;ŒóˆÎÙ§jFÚû<B%ëtrúælr1z}±»»[~yÎŸq74èUÈ8\1/N¤YÑ_ô‰‡hÜèââäİÉÙô‡³Óñ¡'Â¤Ú²x¦İV§e“ÑÉx:z5~}1•ZÛıçÏŸ—G£éñÉdËvÓ¥‚jŸÉÛ×ÓÑùôíùxrxCg)ÅµÏõ¤£·“‰4E	®Üú1|xğš‚Q+Ô€İ`ƒñ=ZKÓ8Å(1ú*Šp&väş#Ğ&^°&xÍ;O‹^cıgÂ/¢‚‚ıS””¢ò¤ôßv±*1Æ¿Œ¦G§Ç‡µû²;ª —%‚Ì“ñÅ»ÑO‡!«ÄAî	Sü-2/ÁtÙeaH@™\ûšìw°ĞRĞ¦"ik/|&] Jº4‘†)£î]‘ü»X9œgLîƒzÊ”Î:8ñ|N#‚ˆdoJdnZ[ıH™ÈÒj÷zuA@µpÓ¹¤«‹åÚ¹Âˆ#HâTàÎõà/Œü8F­œ¼nduÌ(ö³$—UøxÍdS<4İµÅ"ğréP°_î·öñ!gJÏäWêQÆ¿¡vCï¾¡œXø¹ö-ÙôòBú˜‹8Q‰‘;1šÍíî~P º‚e”¹¯)®Ê`äàËQ|Hså®Uœšp•	˜Ók†‡GœÄ—)7‚ÿ,eÉ³2^B 8½g “…gnÜ" `Dœ„cRzğ 6­š@±Ğ¼ÑÏÕÏúãFò˜õ'9–	ûö8·ÄHo¯¡~nĞšš‹zİ§ÒpLx¨Épcş=íÍÂwºÑåÄN’ñ<ÅƒŞœŸ“eá©morWßÂWâ‡I|.T=}r²Ã*İáZÊÕB”²"M·äi‰]é”éåÆÓy”{¥œJ½TTn‘B2ò/¾Ò[W€tĞ ¥<>•™:q	0t^"£’HaÒÁ¿áõ«Ÿ:ZÂxTp§×˜vR!âÄŞZq?¾EW'-)QøTÔÑ£şÜÅDLgoÆ5„NŒó‚?>bÕe¢óÄƒúğÖ7óòÖfx‰GÛû™I²ĞŸbx(É* ddc©Ç—‡\&ÆÉ`@s†VÚë ö¬GXç ­Ñ–¡õ-e¸æ®olktù8¤8=hÔÚ–@è†Ü­Cÿ¼x¡³ _•éP,Ê,PË«¤(^æ¦Şæÿ¯Jeùhóz‹ƒÍ&W*ˆ’Py8-ú›Æ²kÆ[AÀÂ³à^±>Hã´¦‡|ûCÉ](yÿfœ:„¨Ç;ÿsj¡[ƒ?Y‹ûÿÍüß¶v>ÿ·­®5Àù¯ÛéªùïkÏ9âäN"Wa†k¼mµğº'{98	l~1 “	Ç”ü-×$šÑäRìrœÜùğÎGğêxCåTyxùÑmÍf  >Ş}Iœ8Ìæ?<€ZY4ô]í}ÎóŞú°À.Šmô±ö÷5–ÙÛ»5Œ=ïã<vÁÓŞÎÓ)xìá6Uİ‚¥³•¥W°t·²ô–ŞV–AÁÒ×ö~(&˜¼]ë lÜ”êx‰pdóxqD`3K±ÃªŒì¯üWæjP h½ y3Ò¢Ç“ÉÙdîVY$gpÙ²¯Ø'ih¿CÔNEÿ
+şOÆ£ãÓqkî~Éï¿O}ÿ³zØŠï¿ƒNñ¿ÓTøÿuğù5¯ÇùM %ä;¼û¹r.—õwŠsŸœéÔìsKó‰Ïga"',U
+qúÍ«õ¦Ü<¸¼è“Õ—5¶Ô˜ˆàŸgç-BN<u…¿¥¸x NÇ§ÑŒñg¥ñs–Ò+%Iª\÷……|!’¡i"`$¸%±¤åÄss³˜5™Šôg´hHÈ%Á¾V°àMş2yê˜	u®YÚtĞ¾˜7ûÅw;ø¡¨toRãöc'e­£‚›Š*ª¨¢Š*ª¨¢Š*ª¨¢Šş#ú¯1 (  
