@@ -1,9 +1,0 @@
-#install4j response file for Attivio Active Intelligence Engine 4.3.2
-#Tue Jun 30 19:08:57 UTC 2015
-attivio.license.file=/opt/attivio/attivio.license
-sys.component.aiedesigner$Boolean=true
-sys.languageId=en
-sys.adminRights$Boolean=false
-sys.installationTypeId=2817
-sys.installationDir=/opt/attivio/aie_4.3.2
-sys.component.aiecore$Boolean=true
