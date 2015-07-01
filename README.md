@@ -21,6 +21,10 @@ Make sure all the required software (listed above) is installed, then cd to the 
 
 After (quite) a few minutes, Packer should tell you the box was generated successfully.
 
+## Helpful Other Tidbits
+
+If using the packaged Vagrant box on Mac OS X, you'll want to grab [XQuartz](http://xquartz.macosforge.org/landing/)
+
 ## License
 
 MIT license.

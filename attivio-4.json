@@ -64,7 +64,8 @@
     {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/install_daemon.sh"
+      "script": "scripts/install_daemon.sh",
+      "binary": true
     },
     {
       "type": "shell",
