@@ -1,0 +1,154 @@
+#!/bin/bash
+#
+#chkconfig: 2345 75 30
+# description: Attivio Active Intelligence Engine (Agent Server)
+# processname: aie-agent-daemon
+#
+
+
+
+###############################################################
+#               IMPORTANT!!!
+#          Set these variables before running this script:
+#
+ATTIVIO_HOME=/opt/attivio/aie_4.3.2
+AIE_AGENT_PORT=16999
+AIE_AGENT_DATA_DIR=/opt/attivio/aie_4.3.2/data-agent
+RUN_AS_USER=vagrant
+###############################################################
+
+
+
+
+CURRENT_USER=$(whoami)
+
+
+if [ -z "$ATTIVIO_HOME" ]
+then
+ echo "Fatal error: ATTIVIO_HOME is not set!"
+ exit 1
+fi
+
+if [ -z "$AIE_AGENT_PORT" ]
+then
+ echo "Fatal error: AIE_AGENT_PORT is not set!"
+ exit 1
+fi
+
+if [ -z "$AIE_AGENT_DATA_DIR" ]
+then
+ echo "Fatal error: AIE_AGENT_DATA_DIR is not set!"
+ exit 1
+fi
+
+if [ -z "$RUN_AS_USER" ]
+then
+ echo "Fatal error: RUN_AS_USER is not set!"
+ exit 1
+fi
+
+
+AIE_EXEC_CMD=${ATTIVIO_HOME}/bin/aie-agent
+
+
+RETVAL=0
+
+start() {
+
+ get_status > /dev/null
+ if [ $? -eq 0 ]
+ then
+    echo "The AIE agent is already running!  Issue the 'restart' command instead."
+    RETVAL=1
+    return ${RETVAL}
+ fi
+
+
+
+ echo "Starting the agent server on port ${AIE_AGENT_PORT}"
+ if [ "$CURRENT_USER" = "$RUN_AS_USER" ]
+ then
+    nohup ${AIE_EXEC_CMD} -p ${AIE_AGENT_PORT} -d ${AIE_AGENT_DATA_DIR} >/dev/null 2>&1  &
+ else
+    su ${RUN_AS_USER} -c "nohup ${AIE_EXEC_CMD} -p ${AIE_AGENT_PORT} -d ${AIE_AGENT_DATA_DIR}  >/dev/null 2>&1 &"
+ fi
+ RETVAL=$?
+ return ${RETVAL}
+}
+
+
+
+stop() {
+ echo "Attempting to Kill AIE Agent"
+ # Get all the process ids related to the agent - but make sure to remove grep, this script itself, and sudo.
+ pids=$(ps -ef | grep aie-agent | grep -v grep | grep -v 'aie-agent-daemon stop' | grep -v 'aie-agent-daemon restart' | grep -v 'aie-agent-daemon condrestart' | awk '{ print $2 }')
+ for pid in $pids
+ do
+   # Kill all the Agent processes using their PIDS
+   echo "Kill Process with pid : ${pid}"
+   if [ "$CURRENT_USER" = "$RUN_AS_USER" ]
+   then
+     kill ${pid}
+   else
+     su ${RUN_AS_USER} -c "kill ${pid}"
+   fi
+ done
+}
+
+
+
+restart() {
+ echo "Restarting the Agent"
+ stop
+ start
+}
+
+
+
+get_status(){
+
+ agent_proc_count=0
+ # pgrepping for just 'aie-agent' doesn't work - the run of this script shows up.
+ # that's why you need to use the "bin/" prefix
+ agent_proc_count=`pgrep -f 'bin/aie-agent' | grep -v grep | wc -l`
+
+ #We should have found at least 2 matching processes
+ if [ "$agent_proc_count" -ge "2" ]
+ then
+     echo "The AIE Agent is running"
+     RETVAL=0
+ else
+     echo "The AIE Agent is stopped"
+     RETVAL=1
+ fi
+ return ${RETVAL}
+}
+
+
+
+case "$1" in
+ start)
+   start
+   ;;
+ stop)
+   stop
+   ;;
+ status)
+   get_status
+   ;;
+ restart)
+   restart
+   ;;
+ condrestart)
+   get_status > /dev/null
+   if [ $? -eq 0 ]
+   then
+    restart
+   fi
+   ;;
+ *)
+   echo $"Usage: $0 {start|stop|status|restart|condrestart}"
+   exit 1
+esac
+
+exit $?

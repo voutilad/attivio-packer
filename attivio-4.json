@@ -2,7 +2,7 @@
   "variables": {
     "attivio_version": "4.3.2",
     "centos_iso": "CentOS-6.6-x86_64-minimal.iso",
-    "local_http": "172.20.2.167:8080"
+    "local_http": "10.1.7.148:8080"
   },
   "builders": [{
     "type": "virtualbox-iso",
