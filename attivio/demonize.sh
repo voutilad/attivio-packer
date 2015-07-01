@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Copying init script..."
 sudo cp ./aie-agent-daemon /etc/init.d/
+sudo chmod 755 /etc/init.d/aie-agent-daemon
 
 sudo /sbin/chkconfig aie-agent-daemon on
 verification=`sudo /sbin/chkconfig --list aie-agent-daemon`
