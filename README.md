@@ -46,11 +46,21 @@ Want to launch Attivio Designer? If you have a local X11 instance, the Vagrantfi
 >./Designer
 ````
 
-## X11 Support
+### X11 Support
 
 If using the packaged Vagrant box on Mac OS X, you'll want to grab [XQuartz](http://xquartz.macosforge.org/landing/)
 
 For Windows...maybe try [X/Cygwin](http://x.cygwin.com)?
+
+## Customizing
+
+To build any binary installers using the [Makeself](http://stephanepeter.com/makeself/) packager, use a command like:
+````
+>./makeself.sh <path_to_packer_project>/attivio install_daemon.sh \
+ "Attivio 4 Daemonizer" ./demonize.sh
+ 
+> cp install_daemon.sh <path_to_packer_project>/scripts
+````
 
 ## License
 
