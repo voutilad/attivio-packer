@@ -2,8 +2,9 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "attivio4"
+  config.vm.box = "attivio-4"
 
+  config.vm.network "forwarded_port", guest: 16999, host: 16999
   config.vm.network "forwarded_port", guest: 17000, host: 17000
   config.vm.network "forwarded_port", guest: 17001, host: 17001
   config.vm.network "forwarded_port", guest: 17013, host: 17013

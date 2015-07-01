@@ -21,13 +21,40 @@ Make sure all the required software (listed above) is installed, then cd to the 
 
 After (quite) a few minutes, Packer should tell you the box was generated successfully.
 
-## Helpful Other Tidbits
+### Installing the Vagrant Box
+
+Assuming you've used Packer to build the box, which should be in the builds/ directory, copy the .box file and the _Vagrantfile_ to wherever you want to bootstrap your Attivio 4 dev environment.
+
+Install the box like so, making sure to name it _attivio-4_:
+````
+>vagrant box add attivio-4.3.2-centos66.box -n attivio-4
+````
+
+Start up the box:
+````
+>vagrant up
+````
+
+SSH into your new box!:
+````
+>vagrant sss
+````
+
+Want to launch Attivio Designer? If you have a local X11 instance, the Vagrantfile wires up X11 forwarding over ssh, so just launch Designer!:
+````
+>cd /opt/attivio/aie-4.3.2/designer
+>./Designer
+````
+
+## X11 Support
 
 If using the packaged Vagrant box on Mac OS X, you'll want to grab [XQuartz](http://xquartz.macosforge.org/landing/)
 
+For Windows...maybe try [X/Cygwin](http://x.cygwin.com)?
+
 ## License
 
-MIT license.
+Everything here is offered under MIT license with some code/config borrowed from other authors under their MIT licensed projects. (See "Author Information")
 
 ## Author Information
 
