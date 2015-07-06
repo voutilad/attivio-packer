@@ -21,10 +21,38 @@ def download(url, filename, chunkSizeInMB=10):
         print 'Complete'
 
 def find_license(version):
-    pass
+    url = _RELEASES + 'v' + str(version)
+    url = url + '/x64Linux/Installer/do-not-distribute/attivio.license'
+
+    r = requests.get(url)
+    if r.status_code == 200:
+        return url, 'attivio.license'
+    else:
+        print 'Cannot find license at ' + url
+        return None
+
 
 def find_module(module, version, platform='x64Linux'):
-    pass
+    module_root = _RELEASES + 'v' + str(version) + '/' + platform + '/Modules/'
+    root = requests.get(module_root)
+
+    if root.status_code != 200:
+        print 'Failed to get root of releases server: ' + versionRoot
+        return None
+
+    m = re.search('<a href="(' + str(module).lower() + ')/">', root.text)
+    if len(m.groups()) == 1:
+        file_root = module_root + module + '/target/dist/'
+        root = requests.get(file_root)
+
+        if root.status_code != 200:
+            print 'Failed to get root of module files: ' + file_root
+            return None
+
+        m = re.search('<a href="(.+?)(\.zip|\.tar\.gz)"', root.text)
+        filename = m.groups()[0] + m.groups()[1]
+        return file_root + '/' + filename, filename
+
 
 def find_installer(version, platform='x64Linux'):
     '''
@@ -58,3 +86,5 @@ if __name__ == '__main__':
         version = sys.argv[1]
         path, filename = find_installer(version)
         print 'Installer ' + filename + ' located at ' + path
+        print find_license(version)
+        print find_module('datasift', version)
