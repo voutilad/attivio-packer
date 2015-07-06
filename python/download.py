@@ -32,7 +32,7 @@ def find_license(version):
         return None
 
 
-def find_module(module, version, platform='x64Linux'):
+def find_module(version, module, platform='x64Linux'):
     module_root = _RELEASES + 'v' + str(version) + '/' + platform + '/Modules/'
     root = requests.get(module_root)
 
@@ -77,14 +77,21 @@ def find_installer(version, platform='x64Linux'):
 
 
 def usage():
-    print 'Usage: python download.py <attivio version>'
+    print 'Usage: python download.py <attivio version> <installer | license | module name>'
+    print '\tex: >python download.py 4.3.2 installer'
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         usage()
     else:
         version = sys.argv[1]
-        path, filename = find_installer(version)
-        print 'Installer ' + filename + ' located at ' + path
-        print find_license(version)
-        print find_module('datasift', version)
+        method = sys.argv[2].lower()
+
+        if method == 'installer':
+            url, file = find_installer(version)
+        elif method == 'license':
+            url, file = find_license(version)
+        else:
+            url, file = find_module(version, method)
+
+        download(url, file)
