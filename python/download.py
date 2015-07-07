@@ -42,7 +42,7 @@ def find_module(version, module, platform='x64Linux'):
 
     m = re.search('<a href="(' + str(module).lower() + ')/">', root.text)
     if len(m.groups()) == 1:
-        file_root = module_root + module + '/target/dist/'
+        file_root = module_root + module + '/target/dist'
         root = requests.get(file_root)
 
         if root.status_code != 200:

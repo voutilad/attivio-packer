@@ -12,12 +12,21 @@ cp /home/vagrant/download.py .
 python download.py $ATTIVIO_VERSION installer
 python download.py $ATTIVIO_VERSION license
 python download.py $ATTIVIO_VERSION sqlsdk
-#wget http://$FILEHOST/releases/v4.3.2/x64Linux/Installer/AIE-4.3.2.99510-lin64.sh.gz
-#wget http://$FILEHOST/releases/v4.3.2/x64Linux/Installer/do-not-distribute/attivio.license
-gunzip `ls AIE-$ATTIVIO_VERSION*-lin64.sh.gz | awk {'print $1'}`
-sh `ls AIE-$ATTIVIO_VERSION*-lin64.sh.gz | awk {'print $1'}` -q -Vattivio.license.file=/opt/attivio/attivio.license
 
-# make sure we change ownership etc
+gunzip `ls *.gz | awk {'print $1'}`
+sh `ls AIE-*.sh | awk {'print $1'}` -q -Vattivio.license.file=/opt/attivio/attivio.license
+mkdir modules temp
+mv *.tar temp
+cd temp
+tar xvf *.tar
+mv *.tar ../modules
+#assuming attivio installs in ../aie-...
+cp -Rf * ../aie*
+cd ..
+rm -Rf temp
+
+
+# just to be safe, make sure we change ownership etc
 sudo chown -R vagrant /opt/attivio
 sudo chgrp -R vagrant /opt/attivio
 
@@ -31,3 +40,4 @@ echo "export LANG=en_US.UTF-8" >> /home/vagrant/.bashrc
 echo "export LANGUAGE=en_US.UTF-8" >> /home/vagrant/.bashrc
 echo "export LC_COLLATE=C" >> /home/vagrant/.bashrc
 echo "export LC_CTYPE=en_US.UTF-8" >> /home/vagrant/.bashrc
+sudo echo LC_CTYPE=\"en_US.UTF-8\" >> /etc/sysconfig/i18n
