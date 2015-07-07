@@ -14,6 +14,7 @@ Vagrant.configure(2) do |config|
      vb.gui = false
      # Customize the amount of memory on the VM:
      vb.memory = "8192"
+     vb.name = "attivio-4"
   end
 
   # X11 forwarding

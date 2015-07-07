@@ -1,8 +1,7 @@
 {
   "variables": {
     "attivio_version": "4.3.2",
-    "centos_iso": "CentOS-6.6-x86_64-minimal.iso",
-    "local_http": "10.1.7.148:8080"
+    "centos_iso": "CentOS-6.6-x86_64-minimal.iso"
   },
   "builders": [{
     "type": "virtualbox-iso",
@@ -63,7 +62,7 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/attivio.sh",
       "environment_vars": [
-        "FILEHOST={{user `local_http`}}"
+        "ATTIVIO_VERSION={{user `attivio_version`}}"
       ]
     },
     {

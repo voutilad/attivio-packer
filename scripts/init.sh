@@ -30,3 +30,6 @@ sudo python setup.py install
 
 # pip
 curl https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py | sudo python -
+
+#python deps
+sudo pip install requests
