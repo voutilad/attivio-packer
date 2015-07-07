@@ -37,7 +37,7 @@ Start up the box:
 
 SSH into your new box!:
 ````
->vagrant sss
+>vagrant ssh
 ````
 
 Want to launch Attivio Designer? If you have a local X11 instance, the Vagrantfile wires up X11 forwarding over ssh, so just launch Designer!:
@@ -58,7 +58,7 @@ To build any binary installers using the [Makeself](http://stephanepeter.com/mak
 ````
 >./makeself.sh <path_to_packer_project>/attivio install_daemon.sh \
  "Attivio 4 Daemonizer" ./demonize.sh
- 
+
 > cp install_daemon.sh <path_to_packer_project>/scripts
 ````
 
