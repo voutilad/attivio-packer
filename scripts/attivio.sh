@@ -7,10 +7,15 @@ sudo chgrp vagrant /opt/attivio
 
 # download and install attivio
 cd /opt/attivio
-wget http://$FILEHOST/releases/v4.3.2/x64Linux/Installer/AIE-4.3.2.99510-lin64.sh.gz
-wget http://$FILEHOST/releases/v4.3.2/x64Linux/Installer/do-not-distribute/attivio.license
-gunzip AIE-4.3.2.99510-lin64.sh.gz
-sh AIE-4.3.2.99510-lin64.sh -q -Vattivio.license.file=/opt/attivio/attivio.license
+cp /home/vagrant/download.py .
+
+python download.py $ATTIVIO_VERSION installer
+python download.py $ATTIVIO_VERSION license
+python download.py $ATTIVIO_VERSION sqlsdk
+#wget http://$FILEHOST/releases/v4.3.2/x64Linux/Installer/AIE-4.3.2.99510-lin64.sh.gz
+#wget http://$FILEHOST/releases/v4.3.2/x64Linux/Installer/do-not-distribute/attivio.license
+gunzip `ls AIE-$ATTIVIO_VERSION*-lin64.sh.gz | awk {'print $1'}`
+sh `ls AIE-$ATTIVIO_VERSION*-lin64.sh.gz | awk {'print $1'}` -q -Vattivio.license.file=/opt/attivio/attivio.license
 
 # make sure we change ownership etc
 sudo chown -R vagrant /opt/attivio

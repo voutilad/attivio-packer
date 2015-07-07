@@ -54,6 +54,11 @@
       "script": "scripts/vagrant.sh"
     },
     {
+      "type": "file",
+      "source": "./python/download.py",
+      "destination": "/home/vagrant/download.py"
+    },
+    {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/attivio.sh",
