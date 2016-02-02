@@ -1,7 +1,7 @@
 {
   "variables": {
-    "attivio_version": "4.3.2",
-    "centos_iso": "CentOS-6.6-x86_64-minimal.iso"
+    "attivio_version": "5.0.1",
+    "centos_iso": "CentOS-6.7-x86_64-minimal.iso"
   },
   "builders": [{
     "type": "virtualbox-iso",
@@ -16,7 +16,7 @@
     "iso_urls": [
       "iso/{{user `centos_iso`}}",
       "http://localhost:8080/{{user `centos_iso`}}",
-      "http://mirrors.rit.edu/centos/6.6/isos/x86_64/{{user `centos_iso`}}"],
+      "http://mirrors.rit.edu/centos/6.7/isos/x86_64/{{user `centos_iso`}}"],
     "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
     "iso_checksum_type": "md5",
     "ssh_username": "vagrant",
@@ -25,7 +25,7 @@
     "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
     "guest_additions_path": "VBoxGuestAdditions.iso",
     "virtualbox_version_file": ".vbox_version",
-    "vm_name": "packer-centos-6.6-x86_64",
+    "vm_name": "attivio-centos-6.7-x86_64",
     "vboxmanage": [
       [
         "modifyvm",
@@ -79,7 +79,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/attivio-{{user `attivio_version`}}-centos66.box",
+      "output": "builds/attivio-{{user `attivio_version`}}-centos-6.7.box",
       "type": "vagrant"
     }
   ]

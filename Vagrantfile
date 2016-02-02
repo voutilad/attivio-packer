@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "attivio-4"
+  config.vm.box = "attivio-5"
 
   config.vm.network "forwarded_port", guest: 16999, host: 16999
   config.vm.network "forwarded_port", guest: 17000, host: 17000
@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
      vb.gui = false
      # Customize the amount of memory on the VM:
      vb.memory = "8192"
-     vb.name = "attivio-4"
+     vb.name = "attivio-5"
   end
 
   # X11 forwarding
