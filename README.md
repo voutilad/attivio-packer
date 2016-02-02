@@ -1,4 +1,4 @@
-# Packer to Vagrant for CentOS 6.6
+# Packer to Vagrant for CentOS 6.7
 
 Forked from an *awesome* example: [geerlingguy/packer-centos-6](https://github.com/geerlingguy/packer-centos-6)
 
@@ -12,12 +12,13 @@ The following software must be installed/present on your local machine before yo
   - [Vagrant](http://vagrantup.com/)
   - [VirtualBox](https://www.virtualbox.org/)
   - [Makeself](http://stephanepeter.com/makeself/) (if you want to build a new Attivio daemon installer)
+  - [Attivio 5](http://www.attivio.com)
 
 ## Usage
 
 Make sure all the required software (listed above) is installed, then cd to the directory containing this README.md file, and run:
 
-    $ packer build attivio4.json
+    $ packer build attivio5.json
 
 After (quite) a few minutes, Packer should tell you the box was generated successfully.
 
@@ -25,9 +26,9 @@ After (quite) a few minutes, Packer should tell you the box was generated succes
 
 Assuming you've used Packer to build the box, which should be in the builds/ directory, copy the .box file and the _Vagrantfile_ to wherever you want to bootstrap your Attivio 4 dev environment.
 
-Install the box like so, making sure to name it _attivio-4_:
+Install the box like so, making sure to name it _attivio-5_:
 ````
->vagrant box add attivio-4.3.2-centos66.box -n attivio-4
+>vagrant box add attivio-5.1.0-centos66.box -n attivio-5
 ````
 
 Start up the box:
@@ -42,7 +43,7 @@ SSH into your new box!:
 
 Want to launch Attivio Designer? If you have a local X11 instance, the Vagrantfile wires up X11 forwarding over ssh, so just launch Designer!:
 ````
->cd /opt/attivio/aie-4.3.2/designer
+>cd /opt/attivio/aie-5.1.0/designer
 >./Designer
 ````
 
@@ -57,7 +58,7 @@ For Windows...maybe try [X/Cygwin](http://x.cygwin.com)?
 To build any binary installers using the [Makeself](http://stephanepeter.com/makeself/) packager, use a command like:
 ````
 >./makeself.sh <path_to_packer_project>/attivio install_daemon.sh \
- "Attivio 4 Daemonizer" ./demonize.sh
+ "Attivio 5 Daemonizer" ./demonize.sh
 
 > cp install_daemon.sh <path_to_packer_project>/scripts
 ````

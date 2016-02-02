@@ -14,6 +14,11 @@ sudo umount isomount
 sudo rm -rf isomount /home/vagrant/VBoxGuestAdditions.iso
 ###
 
+# setup initial directories
+sudo mkdir /opt/attivio
+sudo chown vagrant /opt/attivio
+sudo chgrp vagrant /opt/attivio
+
 
 ### Python 2.x pip - from https://www.digitalocean.com/community/tutorials/how-to-set-up-python-2-7-6-and-3-3-3-on-centos-6-4
 # Let's download the installation file using wget:

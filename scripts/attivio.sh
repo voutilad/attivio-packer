@@ -1,17 +1,15 @@
 #!/bin/bash -eux
 
-# setup initial directories
-sudo mkdir /opt/attivio
-sudo chown vagrant /opt/attivio
-sudo chgrp vagrant /opt/attivio
-
 # download and install attivio
 cd /opt/attivio
-cp /home/vagrant/download.py .
+# cp /home/vagrant/download.py .
 
-python download.py $ATTIVIO_VERSION installer
-python download.py $ATTIVIO_VERSION license
-python download.py $ATTIVIO_VERSION sqlsdk
+# python download.py $ATTIVIO_VERSION installer
+# python download.py $ATTIVIO_VERSION license
+# python download.py $ATTIVIO_VERSION sqlsdk
+cp installer/*.sh .
+cp installer/*.gz .
+
 
 gunzip `ls *.gz | awk {'print $1'}`
 sh `ls AIE-*.sh | awk {'print $1'}` -q -Vattivio.license.file=/opt/attivio/attivio.license

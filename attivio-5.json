@@ -1,6 +1,6 @@
 {
   "variables": {
-    "attivio_version": "5.0.1",
+    "attivio_version": "5.1.0",
     "centos_iso": "CentOS-6.7-x86_64-minimal.iso"
   },
   "builders": [{
@@ -54,8 +54,8 @@
     },
     {
       "type": "file",
-      "source": "./python/download.py",
-      "destination": "/home/vagrant/download.py"
+      "source": "./installer",
+      "destination": "/opt/attivio"
     },
     {
       "type": "shell",
@@ -64,12 +64,6 @@
       "environment_vars": [
         "ATTIVIO_VERSION={{user `attivio_version`}}"
       ]
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/install_daemon.sh",
-      "binary": true
     },
     {
       "type": "shell",
