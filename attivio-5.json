@@ -17,7 +17,7 @@
       "iso/{{user `centos_iso`}}",
       "http://localhost:8080/{{user `centos_iso`}}",
       "http://mirrors.rit.edu/centos/6.7/isos/x86_64/{{user `centos_iso`}}"],
-    "iso_checksum": "eb3c8be6ab668e6d83a118323a789e6c",
+    "iso_checksum": "9381a24b8bee2fed0c26896141a64b69",
     "iso_checksum_type": "md5",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
@@ -72,9 +72,10 @@
     }
   ],
   "post-processors": [
-    {
+    [{
       "output": "builds/attivio-{{user `attivio_version`}}-centos-6.7.box",
-      "type": "vagrant"
-    }
+      "type": "vagrant",
+      "keep_input_artifact": true
+    }]
   ]
 }
